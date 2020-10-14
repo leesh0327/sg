@@ -71,7 +71,7 @@ define('TARA_CUST_BIZ', 'Success Global');
 
 
 // 테이블
-define('TARA_TABLE_PREFIX', 'tc_');
+define('TARA_TABLE_PREFIX', 'SG_');
 
 $tara['member_table'] = TARA_TABLE_PREFIX.'customer'; // 회원 테이블
 $tara['point_table'] = TARA_TABLE_PREFIX.'point'; // 포인트 테이블

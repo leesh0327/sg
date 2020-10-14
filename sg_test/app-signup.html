@@ -256,11 +256,14 @@
        }
 
 
-       if(recommendor.value=="") {
-           alert("추천자를 입력해 주세요");
-           recommendor.focus();
-           return false;
-       }
+      /*   추천자를 입력안하면 왜 진행을 막아놨는지 모르겠음   */
+      /*    2020-10-14 이승훈    */
+
+       // if(recommendor.value=="") {
+       //     alert("추천자를 입력해 주세요");
+       //     recommendor.focus();
+       //     return false;
+       // }
 
        var signup_form = document.getElementById("signup_form");
        signup_form.submit();

@@ -1,5 +1,3 @@
-
-
 <?php
 	include "./inc/db.php";
 	include "./password.php";
@@ -23,9 +21,6 @@
 	$leg = $_POST['leg'];
 	$send_key = $_POST['send_key'];
 
-
-
-
 	$curl = curl_init();
 
 	curl_setopt_array($curl, array(
@@ -40,7 +35,7 @@
     CURLOPT_HTTPHEADER => array(
         "content-type: application/json"
     ),
-    ));
+  ));
 
 	$response = curl_exec($curl);
 	$err = curl_error($curl);
@@ -51,24 +46,21 @@
 	if($sendanswer->ok==0){
 		echo "<script>alert('Wallet create error Do it again later')</script>";
 	}else{
-
-
-		$sql = "SELECT * FROM tc_customer WHERE uid='$urecommender'";
+		$sql = "SELECT * FROM SG_customer WHERE uid='$urecommender'";
 		$result = mysqli_query($conn, $sql);
 		$recommender = mysqli_fetch_array($result);
 
-		$sql = "SELECT * FROM tc_customer WHERE uid='$usponser'";
+		$sql = "SELECT * FROM SG_customer WHERE uid='$usponser'";
 		$result = mysqli_query($conn, $sql);
 		$sponser = mysqli_fetch_array($result);
 
-		$sql = "INSERT INTO tc_customer (uid,uemail,uname,upassword,urecommender, btc_address, xrp_address, tara_address, wallet_data , eth_address, send_key, btc_balance, eth_balance, xrp_balance, tara_balance, sg_balance,   ucountry) VALUES ('".$uid."','".$uemail."','".$uname."','".$upassword."','".$recommender['idx']."','','','".$sendanswer->ethereumaddress."', '".$eth_key."','','".$send_key."',0,0,0,0,0,'".$ucountry."')";
+		$sql = "INSERT INTO SG_customer (uid,uemail,uname,upassword,urecommender, btc_address, xrp_address, tara_address, wallet_data , eth_address, send_key, btc_balance, eth_balance, xrp_balance, tara_balance, sg_balance,   ucountry) VALUES ('".$uid."','".$uemail."','".$uname."','".$upassword."','".$recommender['idx']."','','','".$sendanswer->ethereumaddress."', '".$eth_key."','','".$send_key."',0,0,0,0,0,'".$ucountry."')";
 
 		$result = mysqli_query($conn, $sql);
 		$last_id = $conn->insert_id;
-		$sql = "UPDATE tc_customer SET ".$leg." =".$last_id." WHERE idx=".$sponser['idx']."";
+		$sql = "UPDATE SG_customer SET ".$leg." =".$last_id." WHERE idx=".$sponser['idx']."";
 		$result = mysqli_query($conn, $sql);
 		echo "<script>location.href='index.php'</script>";
 		include "./db-close.php";
-
 	}
 ?>
